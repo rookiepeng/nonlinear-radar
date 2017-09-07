@@ -32,7 +32,19 @@ figure(4);
 plot(time,ifdata);
 
 figure(5);
-FFTIF=fft(ifdata,NFFT)*2/NFFT;
+FFTFMCW=fft(fmcwdata,NFFT)*2/length(fmcwdata);
+%FFTFMCW=FFTFMCW(1:NFFT/2);
+plot(freq,20*log10(abs(FFTFMCW)));
+%axis([0,8e6,-140,-80]);
+
+figure(6);
+FFTIF=fft(ifdata,NFFT)*2/length(ifdata);
 FFTIF=FFTIF(1:NFFT/2);
 plot(freq(1:NFFT/2),20*log10(abs(FFTIF)));
 axis([0,8e6,-140,-80]);
+
+figure(7);
+FFTTX=fft(txdata.^2/50*1000,NFFT)*2/length(txdata);
+%FFTFMCW=FFTFMCW(1:NFFT/2);
+plot(freq,10*log10(abs(FFTTX)));
+%axis([0,8e6,-140,-80]);
